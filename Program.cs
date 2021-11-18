@@ -11,7 +11,14 @@ namespace DatabaseConnection
 
         static void Main(string[] args)
         {
-            Console.Write("Please enter the userID\n");
+            //Console.Write("Please enter the usernameID\n");
+            //var username = Console.ReadLine();
+            //Console.WriteLine("Please enter the password\n");
+            //var password = Console.ReadLine();
+
+            //var userDal = new UserDAL(_iconfiguration);
+            //userDal.GetUserNameAndPassword(username, password);
+            Console.Write("Please enter the usernameID\n");
             var userId = int.Parse(Console.ReadLine());
             GetAppSettingsFile();
             PrintUsers(userId);

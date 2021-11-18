@@ -47,5 +47,28 @@ namespace DatabaseConnection.DAL
             }
             return listOfUsers;
         }
+
+        public List<User> GetUserNameAndPassword(string userName, string pass)
+        {
+            var listOfUsers = new List<User>();
+            using (SqlConnection con = new SqlConnection(_connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT * FROM tb_users WHERE username = @userName AND password = @pass", con);
+                cmd.Parameters.Add("@username", SqlDbType.VarChar).Value = userName;
+                cmd.Parameters.Add("@pass", SqlDbType.VarChar).Value = pass;
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    listOfUsers.Add(new User
+                    {
+                        Id = Convert.ToInt32(rdr[0]),
+                        username = rdr[1].ToString(),
+                        password = rdr[2].ToString()
+                    });
+                }
+            }
+            return listOfUsers;
+        }
     }
 }
